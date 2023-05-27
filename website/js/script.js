@@ -91,6 +91,8 @@ $("#bconvert").on("click",function() {
     var input = $("#from-input").val();
 
 
+    validateFromInput(input);
+
     console.log($("#from-input").val());
 
     $("#result").val(input);
@@ -134,7 +136,7 @@ function setSelectionVal(selectbox,utype) {
             $('<option>', {
                                     
                 text: element.name,
-                id:   element.id,
+                value:   element.unit,
                    
         
             })
@@ -145,6 +147,11 @@ function setSelectionVal(selectbox,utype) {
          
 }
 
+function getFromUnit() {
+
+    return $("#from-select option:selected").val();
+
+}
 
 function updateDisplayUnit() {
 
@@ -162,7 +169,7 @@ function updateDisplayUnit() {
 
 
     $("#to-name").text(to.split("(")[0]);
-    $("#to-unit").text(to.split("(")[1].split(")")[0])
+    $("#to-unit").text(getFromUnit());
 
 
 
@@ -174,5 +181,62 @@ function getCurrentPage() {
 
 }
 
+function validateFromInput(input) {
 
+    switch(pname) {
+
+        case "length" : {
+
+
+            if (/[a-z]/i.test(input)) {
+
+                var split = input.match(/[^f]*/);
+
+                if (split[0].length == split["input"].length) {
+
+                    return false;
+
+                }
+
+                var feet = split[0];
+
+                if (/[a-z]/i.test(feet)) {
+
+                    console.log("feet value contain letter!");
+                    return false;
+
+                }
+
+
+                var inch = split["input"].replace(feet + "f","");
+
+                if (/[a-z]/i.test(inch)) {
+
+                    console.log("inch value contain letter!");
+                    return false;
+                    
+                }
+
+
+                
+
+
+
+
+
+                
+
+            }
+            
+
+
+
+        }
+
+
+
+    }
+
+
+}
 
