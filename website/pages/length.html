@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title>PandaUnits - Lenght</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="length unit converter">
+    <meta name="author" content="William Pelletier">
+    <link rel="stylesheet" type="text/css" href="../css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+</head>
+<body>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="module" src="../js/script.js"></script>
+
+    <header>        
+        <p class="site-title">Panda Units </p>
+    </header>
+
+    <nav>
+        <ul class="menubar">
+            <li><a class="button" href="../index.html">Home</a></li>
+            <li><a class="button" href="./length.html" id="blength">Length</a></li>
+            <li><a class="button" href="pages/weight.html">Weight</a></li>
+            <li><a class="button" href="pages/volume.html">Volume</a></li>
+            <li><a class="button" href="pages/temparature.html">Temparature</a></li>
+            <li><a class="button" href="pages/currency.html">Curency</a></li>
+        </ul>
+    </nav>
+
+    <section class="content">
+
+        <p class="section-title">Length</p>
+
+
+        <form>
+
+            <div id="dropdown-name">
+                <label>From</label>
+                <label>To</label>
+
+            </div>
+
+            <div id="dropdown-select">
+
+                <select name="from" id="from-select" value="imperial"></select>
+                <a class="button2" id="invert" >⇆</a>
+                <select name="to" id="to-select" value="metric"></select>
+                
+            </div>
+
+            <div >
+
+                <label type="text" id="from-unit"></label>
+
+
+
+            </div>
+
+        </form>
+
+
+    </section>
+
+
+
+
+
+</body>
+</html>
