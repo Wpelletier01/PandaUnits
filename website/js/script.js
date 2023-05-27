@@ -1,36 +1,25 @@
 
+var data = {};
+var pname = getCurrentPage();
 
 
-
-
+// when page load
 $(function() {
 
 
-    switch(getCurrentPage()) {
+    $.getJSON("../json/section.json",function(section) {
 
-
-        case "length": {
-
-          
-            setSelectionVal("imperial","metric","length"); 
-
-         
-          
-        }
-
-
-
-    }
-    
-    
-
-
+        data = section[pname];
+        init();
+    });
+        
 
 });
 
+// when the invert button is trigger
+$("#invert").on("click", function() {
 
-$("#invert").click(function() {
-
+    
 
     switch(getCurrentPage()) {
 
@@ -46,124 +35,138 @@ $("#invert").click(function() {
                 .remove()
                 .end();
 
-            if ($("#from-select").attr("value") == "imperial") {
+            if ($("#from-select").attr("vtype") == "imperial") {
 
 
-                setSelectionVal("metric","imperial","length");
-                $("#from-select").attr("value","metric");
-                $("#to-select").attr("value","imperial");
+                setSelectionVal("#from-select","metric","length");
+                setSelectionVal("#to-select","imperial","length");
+                
+
+                $("#from-select").attr("vtype","metric");
+                $("#to-select").attr("vtype","imperial");
 
             } else {
 
-                setSelectionVal("imperial","metric","length");
-                $("#from-select").attr("value","imperial");
-                $("#to-select").attr("value","metric");
+                setSelectionVal("#from-select","imperial","length");
+                setSelectionVal("#to-select","metric","length");
 
-
+                $("#from-select").attr("vtype","imperial");
+                $("#to-select").attr("vtype","metric");
 
             }
 
 
+            break; 
+
+
         }
 
+
+        default:
+
+            break;
+
     }
-   
 
-               
+    setTimeout(function(){updateDisplayUnit()},20)
 
-
-
-
-    
-    
 
 
 });
 
-$("#from-select").change(function() {
+$("#from-select").on("change",function() { updateDisplayUnit(); }); 
 
+$("#to-select").on("change",function(){ updateDisplayUnit();});
 
-
-    var sel = $("#from-select").val()
-
-    $("#from-unit").text(sel.split("(")[0]);
-
-
-}); 
-
-
-
-function setSelectionVal(from,to,type) {
-
-
-   
-
-           
-
-    $.getJSON("../json/section.json",function(section) {
-
-        section[type][from].forEach(element => {
-                    
-            $("#from-select").append(
-    
-                $('<option>', {
-                                
-                    text: element.name,
-                    id:   element.id
-    
-                })
+$("#from-input").on("change",function() {
 
     
-            ).trigger('change');
+
+
+})
+
+$("#bconvert").on("click",function() {
+
+
+    var input = $("#from-input").val();
+
+
+    console.log($("#from-input").val());
+
+    $("#result").val(input);
+
+
+
+});
+
+
+
+function init() {
+
+
+    if (pname != "currency") {
+
+
+        setSelectionVal("#from-select","imperial");
+        setSelectionVal("#to-select","metric");
+
+
+
+    }
     
-    
-        });
-    
 
+    setTimeout(function(){updateDisplayUnit()}, 100);
 
-    });
-         
+}
 
 
 
-    $.getJSON("../json/section.json",function(section) {
 
-        section[type][to].forEach(element => {
-                    
-            $("#to-select").append(
-    
-                $('<option>', {
-                                
-                    text: element.name,
-                    id:   element.id
-    
-                })
-
-    
-            );
-    
-    
-        });
-    
+function setSelectionVal(selectbox,utype) {
 
 
-    });
-         
-
-
-
+    data[utype].forEach(element => {
+            
             
 
+        $(selectbox).append(
+    
+            $('<option>', {
+                                    
+                text: element.name,
+                id:   element.id,
+                   
+        
+            })
+        );
 
 
+    });
+         
+}
+
+
+function updateDisplayUnit() {
+
+
+    var from = $("#from-select option:selected").text();
     
 
+    $("#from-name").text(from.split("(")[0]);
 
+    $("#from-unit").text(from.split("(")[1].split(")")[0])
+
+    
+    var to = $("#to-select option:selected").text();
+
+
+
+    $("#to-name").text(to.split("(")[0]);
+    $("#to-unit").text(to.split("(")[1].split(")")[0])
 
 
 
 }
-
 
 function getCurrentPage() {
 

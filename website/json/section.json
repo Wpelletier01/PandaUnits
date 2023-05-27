@@ -7,27 +7,28 @@
         "imperial": [
             
             { 
-                "name": "Inche (in)",
-                "id":   "in"
+                "name":     "Inche (in)",
+                "id":       "in"
+         
             
             },
 
              
             { 
-                "name": "Feet (ft)",
-                "id":   "ft"
-            
+                "name":     "Feet (ft)",
+                "id":       "ft"
+          
             },
              
             { 
-                "name": "Yard (yd)",
-                "id":   "yd"
-            
+                "name":     "Yard (yd)",
+                "id":       "yd"
+        
             },
              
             { 
-                "name": "Mile (mi)",
-                "id":   "mi"
+                "name":     "Mile (mi)",
+                "id":       "mi"
             
             }
 
@@ -36,30 +37,30 @@
         "metric": [
 
             {
-                "name": "Millimeter(mm)",
-                "id":   "mm"
-
+                "name":     "Millimeter (mm)",
+                "id":       "mm"
+             
             },
 
 
             {
-                "name": "Centimeters(cm)",
-                "id":   "mm"
-
+                "name":     "Centimeters (cm)",
+                "id":       "cm"
+               
             },
 
 
             {
-                "name": "Meter(m)",
-                "id":   "mm"
-
+                "name":     "Meter (m)",
+                "id":       "m"
+          
             },
 
 
             {
-                "name": "Kilometer(km)",
-                "id":   "mm"
-
+                "name":     "Kilometer (km)",
+                "id":       "km"
+          
             }
 
 
