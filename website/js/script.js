@@ -19,54 +19,22 @@ $(function() {
 // when the invert button is trigger
 $("#invert").on("click", function() {
 
-    
 
-    switch(getCurrentPage()) {
+    if (getCurrentPage() != "currency") {
 
-        case "length": {
-
-            $("#from-select")
-                .find("option")
-                .remove()
-                .end();
-
-            $("#to-select")
-                .find("option")
-                .remove()
-                .end();
-
-            if ($("#from-select").attr("vtype") == "imperial") {
-
-
-                setSelectionVal("#from-select","metric","length");
-                setSelectionVal("#to-select","imperial","length");
+        
                 
+        var from = $("#from-select").val();
+        var to = $("#to-select").val();
 
-                $("#from-select").attr("vtype","metric");
-                $("#to-select").attr("vtype","imperial");
-
-            } else {
-
-                setSelectionVal("#from-select","imperial","length");
-                setSelectionVal("#to-select","metric","length");
-
-                $("#from-select").attr("vtype","imperial");
-                $("#to-select").attr("vtype","metric");
-
-            }
+        
+        $("#from-select").val(to); 
+        $("#to-select").val(from);           
 
 
-            break; 
-
-
-        }
-
-
-        default:
-
-            break;
 
     }
+    
 
     setTimeout(function(){updateDisplayUnit()},20)
 
@@ -91,16 +59,57 @@ $("#bconvert").on("click",function() {
     var input = $("#from-input").val();
 
 
-    validateFromInput(input);
+    if (validateFromInput(input)) {
 
-    console.log($("#from-input").val());
+      
 
-    $("#result").val(input);
+        switch(pname) {
+
+            case "length": {
+
+                var result = convertLength();
+
+                if (String(result).split(".")[1].length > 6) {
+
+
+                    var i = String(result).split(".")[0];
+                    var dec  = String(result).split(".")[1].substring(0,6);
+                    result = Number(i + "." + dec);
+                    
+
+                }
+
+                break;
+
+
+            }
+
+
+
+        }
+
+
+
+    }
+
+
+    $("#result").val(result);
+
+    updateDisplayUnit();
+
+});
+
+$("#breset").on("click",function() {
+
+
+
+    $("#from-input").val("0");
+    $("#result").val("0");
+
 
 
 
 });
-
 
 
 function init() {
@@ -110,9 +119,14 @@ function init() {
 
 
         setSelectionVal("#from-select","imperial");
+        setSelectionVal("#from-select","metric");
+
         setSelectionVal("#to-select","metric");
+        setSelectionVal("#to-select","imperial");
 
 
+        $("#from-input").val("0");
+        $("#result").val("0");
 
     }
     
@@ -153,6 +167,32 @@ function getFromUnit() {
 
 }
 
+function getFromVal() {
+
+    return $("#from-input").val();
+
+}
+
+function getToUnit() {
+
+    return $("#to-select option:selected").val();
+
+}
+
+function getFromUnitFamily() {
+
+    return $("#from-select").attr("vtype");
+
+}
+
+function getToUnitFamily() {
+
+    return $("#to-select").attr("vtype");
+
+}
+
+
+
 function updateDisplayUnit() {
 
 
@@ -169,7 +209,7 @@ function updateDisplayUnit() {
 
 
     $("#to-name").text(to.split("(")[0]);
-    $("#to-unit").text(getFromUnit());
+    $("#to-unit").text(getToUnit());
 
 
 
@@ -183,55 +223,71 @@ function getCurrentPage() {
 
 function validateFromInput(input) {
 
-    switch(pname) {
 
-        case "length" : {
-
-
-            if (/[a-z]/i.test(input)) {
-
-                var split = input.match(/[^f]*/);
-
-                if (split[0].length == split["input"].length) {
-
-                    return false;
-
-                }
-
-                var feet = split[0];
-
-                if (/[a-z]/i.test(feet)) {
-
-                    console.log("feet value contain letter!");
-                    return false;
-
-                }
+    if (/[a-zA-Z]/g.test(input)) {
 
 
-                var inch = split["input"].replace(feet + "f","");
+        $("#from-input").val("INVALID INPUT");
+        $("#result").val("INVALID INPUT");
 
-                if (/[a-z]/i.test(inch)) {
+        return false;
+    }
 
-                    console.log("inch value contain letter!");
-                    return false;
-                    
-                }
+    return true; 
 
+}
 
-                
-
-
+function convertLength() {
 
 
+    var from = getFromUnit();
+    var to = getToUnit();
+    var input = getFromVal();
 
-                
+
+    if (getFromUnitFamily() == "imperial") {
+
+        var inches = convertToInches(input,from);0
+        
+        var meters = inches * 0.0254;
+
+        var final = 0;
+
+        switch (to) {
+
+
+            case "mm": {
+
+                final = meters * 1000;
+                break;
+
+            }
+
+            case "cm": {
+
+                final = meters * 100;
+                break;
 
             }
             
+            case "km": {
 
+                final = meters * 0.001;
+
+            }
+
+            default:
+
+                final = meters;
+
+                break;
 
 
         }
+
+        return final;
+
+
 
 
 
@@ -240,3 +296,45 @@ function validateFromInput(input) {
 
 }
 
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+function convertToInches(value,unit) {
+
+    var fmt_input = 0;
+
+    switch (unit) {
+    
+        case "ft": {
+            fmt_input = value * 12;
+            break;
+            
+        } 
+
+        case "yd": {
+
+            fmt_input = value * 36;
+            break;
+        }
+
+        case "mi": {
+
+            fmt_input = value * 63360;
+
+            break;
+        }
+        
+        default:
+
+            fmt_input = Number(value);
+            break;
+
+        
+    }
+
+
+    return fmt_input;
+
+
+}
