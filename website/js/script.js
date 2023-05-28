@@ -2,6 +2,8 @@
 var data = {};
 var pname = getCurrentPage();
 
+var LENGTH_METRIC = [ "mm", "cm", "m", "km" ];
+var LENGTH_IMPERIAL = [ "in", "ft", "yd", "mi"];
 
 // when page load
 $(function() {
@@ -42,16 +44,68 @@ $("#invert").on("click", function() {
 
 });
 
-$("#from-select").on("change",function() { updateDisplayUnit(); }); 
+$("#from-select").on("change",function() { 
 
-$("#to-select").on("change",function(){ updateDisplayUnit();});
 
-$("#from-input").on("change",function() {
+    var from = $("#from-select").val();
+
+    switch (pname) {
+       
+        case "length": {
+
+            if (LENGTH_IMPERIAL.includes(from)) {
+
+                $("#from-select").attr("vtype","imperial");
+
+            } else {
+
+                $("#from-select").attr("vtype","metric");
+
+            }
+
+        }
+
 
     
+    }
+
+    updateDisplayUnit(); 
 
 
-})
+}); 
+
+$("#to-select").on("change",function(){
+    
+
+    var to = $("#to-select").val();
+
+    switch (pname) {
+       
+        case "length": {
+
+            if (LENGTH_IMPERIAL.includes(to)) {
+
+                $("#to-select").attr("vtype","imperial");
+
+            } else {
+
+                $("#to-select").attr("vtype","metric");
+
+            }
+
+        }
+
+
+    
+    }
+
+
+
+    updateDisplayUnit();
+
+
+});
+
 
 $("#bconvert").on("click",function() {
 
@@ -68,17 +122,9 @@ $("#bconvert").on("click",function() {
             case "length": {
 
                 var result = convertLength();
-
-                if (String(result).split(".")[1].length > 6) {
-
-
-                    var i = String(result).split(".")[0];
-                    var dec  = String(result).split(".")[1].substring(0,6);
-                    result = Number(i + "." + dec);
-                    
-
-                }
-
+                
+                console.log(result);
+                
                 break;
 
 
@@ -244,54 +290,95 @@ function convertLength() {
     var to = getToUnit();
     var input = getFromVal();
 
+    var final = 0;
 
     if (getFromUnitFamily() == "imperial") {
-
-        var inches = convertToInches(input,from);0
         
-        var meters = inches * 0.0254;
+        var inches = convertToInches(input,from);
+        
+        if (getToUnitFamily() == "metric") {
 
-        var final = 0;
+            console.log("cfsdssds");
+            final = convertToMeter(inches);
 
-        switch (to) {
 
+        } else {
 
-            case "mm": {
-
-                final = meters * 1000;
-                break;
-
-            }
-
-            case "cm": {
-
-                final = meters * 100;
-                break;
-
-            }
-            
-            case "km": {
-
-                final = meters * 0.001;
-
-            }
-
-            default:
-
-                final = meters;
-
-                break;
+            var meters = inches * 0.0254;
+            final = convertToImperial(meters,to);
 
 
         }
 
-        return final;
+        
 
+
+
+
+
+    } else {
+
+        var meters = convertToMeter(input,from);
+
+
+
+        if (getToUnitFamily() == "imperial") {
+
+       
+            final = convertToImperial(meters,to);
+
+        } else {
+
+
+            console.log(meters);
+       
+            switch(to) {
+
+                case "mm": {
+
+                    final = meters * 1000;
+                    break;
+
+                }
+
+                case "cm": {
+
+                    final = meters * 100;
+                    break;
+                }
+
+                case "m": {
+
+                    console.log("test");
+                    final = meters;
+
+                    console.log(final);
+                    break;
+                }
+
+                case "km": {
+
+                    final = meters * 0.001;
+                    break;
+                }
+
+
+
+            }
+
+
+
+
+        }
 
 
 
 
     }
+
+    console.log(final)
+
+    return final;
 
 
 }
@@ -325,9 +412,9 @@ function convertToInches(value,unit) {
             break;
         }
         
-        default:
-
-            fmt_input = Number(value);
+        case "in":
+           
+            fmt_input = value;
             break;
 
         
@@ -338,3 +425,132 @@ function convertToInches(value,unit) {
 
 
 }
+
+function convertToMeter(value,unit) {
+
+    var fmt_input = 0;
+    
+
+    switch (unit) {
+
+        case "mm": {
+
+            fmt_input = value * 0.001;
+            break;
+        }
+
+        case "cm": {
+
+            fmt_input = value * 0.01;
+            break;
+
+        }
+
+        case "km": {
+
+
+            fmt_input = value * 1000;            
+            break;
+
+        }
+
+        default: {
+
+            fmt_input = value;
+            break;
+        }
+
+
+    }
+
+    return fmt_input
+
+}
+
+function convertToImperial(meters,units) {
+
+    var val = 0;
+
+    switch(units) {
+
+        case "in": {
+
+            val = meters * 39.3701;
+
+            break;
+
+        }
+
+        case "ft": {
+
+            val = meters * 3.28084;
+            break;
+
+
+        }
+
+        case "yd": {
+
+            val = meters *  1.09361;
+            break;
+
+        }
+
+        case "mi": {
+
+
+            val = meters * 0.000621371;                    
+            break;
+        }
+
+
+
+    }
+
+    return val 
+
+}
+
+
+function convertToMetric(inches,unit) {
+    
+    var val = 0;
+    var meters = inches * 0.0254;
+
+    switch (unit) {
+
+
+        case "mm": {
+
+            val = meters * 1000;
+            break;
+
+        }
+
+        case "cm": {
+
+            val = meters * 100;
+            break;
+
+        }
+        
+        case "km": {
+
+            val = meters * 0.001;
+
+        }
+
+        default:
+
+            val = meters;
+
+            break;
+
+
+    }
+
+
+    return val 
+
+}
+
