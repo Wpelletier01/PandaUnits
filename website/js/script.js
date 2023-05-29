@@ -3,8 +3,8 @@ var data = {};
 var pname = getCurrentPage();
 
 
-
-var module = await import( "./" + pname + ".js");
+console.log(pname);
+//var module = await import( "./" + pname + ".js");
 
 
 

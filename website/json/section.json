@@ -63,6 +63,76 @@
           
             }
 
+        
+
+        ]
+
+
+
+    },
+
+
+    "weight": {
+
+
+
+        "imperial": [
+
+            {
+                "name":     "ounce (oz)",
+                "unit":     "oz"
+
+            },
+
+            {
+
+                "name":     "pound (lb)",
+                "unit":     "lb"
+
+            },
+
+            {
+                "name":     "stone (st)",
+                "unit":     "st"
+
+            },
+
+            {
+
+                "name":     "tone (t)" ,
+                "id":       "t"
+            }
+
+
+        ],
+
+
+        "metric": [
+
+            {
+                "name":     "microgram (μg)",
+                "id":       "μg"
+
+            },
+
+            {
+                "name":     "milligram (mg)",
+                "id":       "mg"
+
+            },
+
+            {
+                "name":     "gram (g)",
+                "id":       "g"
+
+            },
+
+            {
+                "name":     "kilogram (kg)",
+                "id":       "kg"
+            }
+
+
 
         ]
 
