@@ -2,8 +2,12 @@
 var data = {};
 var pname = getCurrentPage();
 
-var LENGTH_METRIC = [ "mm", "cm", "m", "km" ];
-var LENGTH_IMPERIAL = [ "in", "ft", "yd", "mi"];
+
+
+var module = await import( "./" + pname + ".js");
+
+
+
 
 // when page load
 $(function() {
@@ -52,8 +56,8 @@ $("#from-select").on("change",function() {
     switch (pname) {
        
         case "length": {
-
-            if (LENGTH_IMPERIAL.includes(from)) {
+            
+            if (module.IMPERIAL.includes(from)) {
 
                 $("#from-select").attr("vtype","imperial");
 
@@ -79,71 +83,36 @@ $("#to-select").on("change",function(){
 
     var to = $("#to-select").val();
 
-    switch (pname) {
-       
-        case "length": {
+            
+    if (module.IMPERIAL.includes(to)) {
+               
+        $("#to-select").attr("vtype","imperial");
 
-            if (LENGTH_IMPERIAL.includes(to)) {
+    } else {
 
-                $("#to-select").attr("vtype","imperial");
+        $("#to-select").attr("vtype","metric");
 
-            } else {
-
-                $("#to-select").attr("vtype","metric");
-
-            }
-
-        }
-
-
-    
     }
 
-
-
     updateDisplayUnit();
+
+});
+
+
+$(document).on("keypress", function(e) {
+
+
+    if (e.key == "Enter") {
+
+        convertTrigged();
+
+    }
 
 
 });
 
 
-$("#bconvert").on("click",function() {
-
-
-    var input = $("#from-input").val();
-
-
-    if (validateFromInput(input)) {
-
-      
-
-        switch(pname) {
-
-            case "length": {
-
-                var result = convertLength();
-                
-                console.log(result);
-                
-                break;
-
-
-            }
-
-
-
-        }
-
-
-
-    }
-
-
-    $("#result").val(result);
-
-    updateDisplayUnit();
-
-});
+$("#bconvert").on("click",function() { convertTrigged()});
 
 $("#breset").on("click",function() {
 
@@ -158,7 +127,37 @@ $("#breset").on("click",function() {
 });
 
 
+
+function convertTrigged() {
+
+    var input = $("#from-input").val();
+
+    if (validateFromInput(input)){
+
+        var result = module.convert(input,getFromUnit(),getToUnit());
+
+        console.log(result);
+
+        if(!Number.isInteger(result)){
+
+            
+            result = round(result,5);
+
+
+        }
+        
+        $("#result").val(result);
+
+    }
+
+    updateDisplayUnit();
+
+
+}
+
+
 function init() {
+
 
 
     if (pname != "currency") {
@@ -261,16 +260,12 @@ function updateDisplayUnit() {
 
 }
 
-function getCurrentPage() {
-
-    return document.location.href.match(/[^\/]+$/)[0].split(".")[0]
-
-}
+function getCurrentPage() { return document.location.href.match(/[^\/]+$/)[0].split(".")[0] }
 
 function validateFromInput(input) {
 
 
-    if (/[a-zA-Z]/g.test(input)) {
+    if (/[^0-9\.]/g.test(input)) {
 
 
         $("#from-input").val("INVALID INPUT");
@@ -283,274 +278,6 @@ function validateFromInput(input) {
 
 }
 
-function convertLength() {
 
-
-    var from = getFromUnit();
-    var to = getToUnit();
-    var input = getFromVal();
-
-    var final = 0;
-
-    if (getFromUnitFamily() == "imperial") {
-        
-        var inches = convertToInches(input,from);
-        
-        if (getToUnitFamily() == "metric") {
-
-            console.log("cfsdssds");
-            final = convertToMeter(inches);
-
-
-        } else {
-
-            var meters = inches * 0.0254;
-            final = convertToImperial(meters,to);
-
-
-        }
-
-        
-
-
-
-
-
-    } else {
-
-        var meters = convertToMeter(input,from);
-
-
-
-        if (getToUnitFamily() == "imperial") {
-
-       
-            final = convertToImperial(meters,to);
-
-        } else {
-
-
-            console.log(meters);
-       
-            switch(to) {
-
-                case "mm": {
-
-                    final = meters * 1000;
-                    break;
-
-                }
-
-                case "cm": {
-
-                    final = meters * 100;
-                    break;
-                }
-
-                case "m": {
-
-                    console.log("test");
-                    final = meters;
-
-                    console.log(final);
-                    break;
-                }
-
-                case "km": {
-
-                    final = meters * 0.001;
-                    break;
-                }
-
-
-
-            }
-
-
-
-
-        }
-
-
-
-
-    }
-
-    console.log(final)
-
-    return final;
-
-
-}
-
-function round(value, decimals) {
-    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-}
-
-function convertToInches(value,unit) {
-
-    var fmt_input = 0;
-
-    switch (unit) {
-    
-        case "ft": {
-            fmt_input = value * 12;
-            break;
-            
-        } 
-
-        case "yd": {
-
-            fmt_input = value * 36;
-            break;
-        }
-
-        case "mi": {
-
-            fmt_input = value * 63360;
-
-            break;
-        }
-        
-        case "in":
-           
-            fmt_input = value;
-            break;
-
-        
-    }
-
-
-    return fmt_input;
-
-
-}
-
-function convertToMeter(value,unit) {
-
-    var fmt_input = 0;
-    
-
-    switch (unit) {
-
-        case "mm": {
-
-            fmt_input = value * 0.001;
-            break;
-        }
-
-        case "cm": {
-
-            fmt_input = value * 0.01;
-            break;
-
-        }
-
-        case "km": {
-
-
-            fmt_input = value * 1000;            
-            break;
-
-        }
-
-        default: {
-
-            fmt_input = value;
-            break;
-        }
-
-
-    }
-
-    return fmt_input
-
-}
-
-function convertToImperial(meters,units) {
-
-    var val = 0;
-
-    switch(units) {
-
-        case "in": {
-
-            val = meters * 39.3701;
-
-            break;
-
-        }
-
-        case "ft": {
-
-            val = meters * 3.28084;
-            break;
-
-
-        }
-
-        case "yd": {
-
-            val = meters *  1.09361;
-            break;
-
-        }
-
-        case "mi": {
-
-
-            val = meters * 0.000621371;                    
-            break;
-        }
-
-
-
-    }
-
-    return val 
-
-}
-
-
-function convertToMetric(inches,unit) {
-    
-    var val = 0;
-    var meters = inches * 0.0254;
-
-    switch (unit) {
-
-
-        case "mm": {
-
-            val = meters * 1000;
-            break;
-
-        }
-
-        case "cm": {
-
-            val = meters * 100;
-            break;
-
-        }
-        
-        case "km": {
-
-            val = meters * 0.001;
-
-        }
-
-        default:
-
-            val = meters;
-
-            break;
-
-
-    }
-
-
-    return val 
-
-}
+function round(value, decimals) { return Number(Math.round(value+'e'+decimals)+'e-'+decimals); }
 
