@@ -1,10 +1,18 @@
 
 var data = {};
+
 var pname = getCurrentPage();
 
-var moduleFile = './' + pname + '.js';
+if ( pname != null) {
 
-let module = await import(moduleFile);
+    var moduleFile = './' + pname + '.js';
+
+    let module = await import(moduleFile);
+
+
+
+}
+
 
 
 
@@ -12,13 +20,17 @@ let module = await import(moduleFile);
 // when page load
 $(function() {
 
+    if (pname != null) {
 
-    $.getJSON("../json/section.json",function(section) {
+        $.getJSON("../json/section.json",function(section) {
 
-        data = section[pname];
-        init();
-    });
-        
+            data = section[pname];
+            init();
+        });
+            
+
+    }
+
 
 });
 
@@ -26,21 +38,19 @@ $(function() {
 $("#invert").on("click", function() {
 
 
-    if (getCurrentPage() != "currency") {
 
-        
+      
                 
-        var from = $("#from-select").val();
-        var to = $("#to-select").val();
+    var from = $("#from-select").val();
+    var to = $("#to-select").val();
 
         
-        $("#from-select").val(to); 
-        $("#to-select").val(from);           
+    $("#from-select").val(to); 
+    $("#to-select").val(from);           
 
 
 
-    }
-    
+     
 
     setTimeout(function(){updateDisplayUnit()},20)
 
@@ -53,7 +63,7 @@ $("#from-select").on("change",function() {
 
     var from = $("#from-select").val();
     
-    if (pname != "currency") {
+    if (pname != "time" || pname != "temparature") {
 
         if (module.IMPERIAL.includes(from)) {
 
@@ -67,12 +77,10 @@ $("#from-select").on("change",function() {
     
 
 
-    }
+    } 
 
-    
 
     updateDisplayUnit(); 
-
 
 }); 
 
@@ -81,16 +89,21 @@ $("#to-select").on("change",function(){
     
     var to = $("#to-select").val();
 
-            
-    if (module.IMPERIAL.includes(to)) {
+
+    if (pname != "time" && pname != "temparature") {
+
+        if (module.IMPERIAL.includes(to)) {
                
-        $("#to-select").attr("vtype","imperial");
+            $("#to-select").attr("vtype","imperial");
 
-    } else {
+        } else {
 
-        $("#to-select").attr("vtype","metric");
+            $("#to-select").attr("vtype","metric");
 
+        }
     }
+
+
 
     if (getFromVal() != "0") {
 
@@ -162,9 +175,21 @@ function convertTrigged() {
 
 function init() {
 
+    
+
+    if (pname == "temparature" || pname == "time") {
+    
+        setSelectionVal("#from-select","units");
+        setSelectionVal("#to-select","units");
+
+        $("#to-select option:selected").text(data["units"][1]["name"]);
+
+        $("#from-input").val("0");
+        $("#result").val("0");
+
+    } else {
 
 
-    if (pname != "currency") {
 
 
         setSelectionVal("#from-select","imperial");
@@ -177,7 +202,8 @@ function init() {
         $("#from-input").val("0");
         $("#result").val("0");
 
-    }
+    } 
+
     setTimeout(function(){updateDisplayUnit()}, 100);
 
 }
@@ -188,23 +214,46 @@ function init() {
 function setSelectionVal(selectbox,utype) {
 
 
-    data[utype].forEach(element => {
-            
-            
 
-        $(selectbox).append(
+    if (pname == "time" || pname == "temparature") {
+       
+
+        data[utype].forEach(element => {
+
+            $(selectbox).append(
     
-            $('<option>', {
+                $('<option>', {
                                     
-                text: element.name,
-                value:   element.unit,
+                    text: element.name,
+                    value:   element.unit,
                    
         
-            })
-        );
+                })
+            );
+            
+
+        });
 
 
-    });
+
+    } else {
+
+        data[utype].forEach(element => {
+            
+            $(selectbox).append(
+    
+                $('<option>', {
+                                    
+                    text: element.name,
+                    value:   element.unit,
+                   
+        
+                })
+            );
+
+
+        });
+    }
          
 }
 
@@ -262,7 +311,22 @@ function updateDisplayUnit() {
 
 }
 
-function getCurrentPage() { return document.location.href.match(/[^\/]+$/)[0].split(".")[0] }
+function getCurrentPage() { 
+
+
+    var tmp = document.location.href.match(/[^\/]+$/);
+
+    if (tmp == null) {
+
+        return null
+
+    }
+    
+    return tmp[0].split(".")[0] 
+
+
+
+}
 
 function validateFromInput(input) {
 

@@ -152,6 +152,229 @@
 
 
 
+    },
+
+    "volume": {
+
+
+        "imperial": [
+
+            {
+                "name" : "US gallon (US gal)",
+                "unit" : "US gal"
+
+            },
+
+            {
+
+                "name": "US quart (US qt)",
+                "unit": "US qt"
+
+            },
+
+            {
+                "name": "US pint (US pt)",
+                "unit": "US pt"
+
+
+            },
+
+            {
+                "name": "US cup (US c)",
+                "unit": "US c" 
+            },
+
+            {
+                "name": "fluid ounce (fl oz)",
+                "unit": "fl oz"
+
+
+            },
+
+            {
+                "name": "US tablespoon (US tbsp)",
+                "unit": "US tbsp"
+
+
+            },
+            {
+                "name": "US teaspoon (US tsp)",
+                "unit": "US tsp"
+
+
+            },
+
+            {
+                "name" : "UK gallon (UK gal)",
+                "unit" : "UK gal"
+
+            },
+
+            {
+
+                "name": "UK quart (UK qt)",
+                "unit": "UK qt"
+
+            },
+
+            {
+                "name": "UK pint (UK pt)",
+                "unit": "UK pt"
+
+
+            },
+
+            {
+                "name": "UK cup (UK c)",
+                "unit": "UK c" 
+            },
+
+
+            {
+                "name": "UK tablespoon (UK tbsp)",
+                "unit": "UK tbsp"
+
+
+            },
+            {
+                "name": "UK teaspoon (UK tsp)",
+                "unit": "UK tsp"
+
+
+            },
+
+
+            {
+                "name": "Cubic foot",
+                "unit": "ft3"
+
+
+            },
+            {
+                "name": "Cubic Inch",
+                "unit": "in3"
+
+
+            }
+           
+
+        ],
+
+        "metric": [
+
+
+            {
+                "name": "Cubic meter (m3)",
+                "unit": "m3"
+
+            },
+
+            {
+                "name": "Litter (L)",
+                "unit": "L" 
+
+            },
+
+            {
+
+                "name": "milliliter (ml)",
+                "unit": "ml"
+
+            }
+ 
+
+        ]
+
+
+
+    },
+
+    "temparature": {
+
+        "units": [
+
+            {
+                "name": "Degree Celsius (C)",
+                "unit": "C" 
+            },
+
+            {
+                "name": "Fahrenheit Celcius (F)",
+                "unit": "F"  
+
+            }, 
+
+            {
+                "name": "Kelvin (K)",
+                "unit": "K"  
+
+            }
+
+
+        ]
+
+    },
+
+    "time": {
+
+        "units": [
+
+            {   
+                "name": "Nanosecond (ns)",
+                "unit": "ns"  
+            }, 
+
+            {
+                "name": "Microsecond (μs)",
+                "unit": "μs"
+            },
+
+            {
+                "name": "Millisecond (ms)",
+                "unit": "ms"
+            },
+
+            {
+                "name": "Second (s)",
+                "unit": "s" 
+            },
+
+            {
+                "name": "Minute (min)",
+                "unit": "min" 
+
+            },
+
+            {
+                "name": "Hour (hr)",
+                "unit": "hr" 
+            },
+
+            {
+                "name": "Day (d)",
+                "unit": "d" 
+            },
+
+            {
+                "name": "Week (w)",
+                "unit": "w" 
+            },
+
+            {
+                "name": "Month (m)",
+                "unit": "m" 
+            },
+
+            {
+                "name": "Year (yr)",
+                "unit": "yr" 
+            }
+
+
+        ]
+
+
+
     }
 
 
