@@ -2,9 +2,9 @@
 var data = {};
 var pname = getCurrentPage();
 
+var moduleFile = './' + pname + '.js';
 
-console.log(pname);
-//var module = await import( "./" + pname + ".js");
+let module = await import(moduleFile);
 
 
 
@@ -52,26 +52,24 @@ $("#from-select").on("change",function() {
 
 
     var from = $("#from-select").val();
+    
+    if (pname != "currency") {
 
-    switch (pname) {
-       
-        case "length": {
-            
-            if (module.IMPERIAL.includes(from)) {
+        if (module.IMPERIAL.includes(from)) {
 
-                $("#from-select").attr("vtype","imperial");
-
-            } else {
-
-                $("#from-select").attr("vtype","metric");
-
-            }
-
+            $("#from-select").attr("vtype","imperial");
+    
+        } else {
+    
+            $("#from-select").attr("vtype","metric");
+    
         }
+    
 
+
+    }
 
     
-    }
 
     updateDisplayUnit(); 
 
@@ -80,7 +78,7 @@ $("#from-select").on("change",function() {
 
 $("#to-select").on("change",function(){
     
-
+    
     var to = $("#to-select").val();
 
             
@@ -94,7 +92,15 @@ $("#to-select").on("change",function(){
 
     }
 
-    updateDisplayUnit();
+    if (getFromVal() != "0") {
+
+        convertTrigged();
+
+    } else {
+
+        updateDisplayUnit();
+
+    }
 
 });
 
@@ -172,8 +178,6 @@ function init() {
         $("#result").val("0");
 
     }
-    
-
     setTimeout(function(){updateDisplayUnit()}, 100);
 
 }
@@ -252,7 +256,7 @@ function updateDisplayUnit() {
 
 
     $("#to-name").text(to.split("(")[0]);
-    $("#to-unit").text(getToUnit());
+    $("#to-unit").text(to.split("(")[1].split(")")[0]);
 
 
 

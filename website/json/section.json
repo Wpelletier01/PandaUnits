@@ -99,8 +99,14 @@
 
             {
 
-                "name":     "tone (t)" ,
-                "id":       "t"
+                "name":     "Us ton (US t)" ,
+                "unit":       "US t"
+            },
+
+            {
+                "name":     "Imperial ton (UK t)",
+                "unit":       "UK t"
+
             }
 
 
@@ -111,25 +117,33 @@
 
             {
                 "name":     "microgram (μg)",
-                "id":       "μg"
+                "unit":       "μg"
 
             },
 
             {
                 "name":     "milligram (mg)",
-                "id":       "mg"
+                "unit":       "mg"
 
             },
 
             {
                 "name":     "gram (g)",
-                "id":       "g"
+                "unit":       "g"
 
             },
 
             {
                 "name":     "kilogram (kg)",
-                "id":       "kg"
+                "unit":       "kg"
+            },
+
+            {
+
+                "name":     "Tonne (t)",
+                "unit":       "t"
+        
+
             }
 
 
