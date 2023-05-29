@@ -136,8 +136,6 @@ function convertTrigged() {
 
         var result = module.convert(input,getFromUnit(),getToUnit());
 
-        console.log(result);
-
         if(!Number.isInteger(result)){
 
             

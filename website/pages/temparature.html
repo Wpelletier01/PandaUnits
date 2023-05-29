@@ -13,6 +13,68 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="js/script.js"></script>
+    <header>        
+        <p class="site-title">Panda Units </p>
+    </header>
+
+    <nav>
+        <ul class="menubar">
+            <li><a class="button" href="../.">Home</a></li>
+            <li><a class="button" href="./length.html" id="blength">Length</a></li>
+            <li><a class="button" href="./weight.html">Weight</a></li>
+            <li><a class="button" href="./volume.html">Volume</a></li>
+            <li><a class="button" href="./temparature.html">Temparature</a></li>
+            <li><a class="button" href="./currency.html">Curency</a></li>
+        </ul>
+    </nav>
+
+    <section class="content">
+
+        <p class="section-title">Temparature</p>
+
+
+        <form>
+
+            <div id="dropdown-name">
+                <label>From</label>
+                <label>To</label>
+
+            </div>
+
+            <div id="dropdown-select">
+                
+                <select name="from" id="from-select" vtype="imperial"></select>
+                <input type="button" id="invert" value="⇆" />
+                <select name="to" id="to-select" vtype="metric"></select>
+                
+            </div>
+
+            <div >
+
+                <label type="text" id="from-name"></label>
+                <input type="text" id="from-input" autocomplete="off">
+                <label type="text" id="from-unit"></label>
+
+            </div>
+
+            <div>
+
+                <input type="button" id="bconvert" value="Convert">
+                <input type="button" id="breset"  value="Reset">
+                
+            </div>
+
+            <div>
+                <label type="text" id="to-name"></label>
+                <input type="text" text="" id="result" readonly>
+                <label type="text" id="to-unit"></label>
+
+            </div>
+
+        </form>
+
+
+    </section>
 
 </body>
 </html>
