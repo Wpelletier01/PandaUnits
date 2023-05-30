@@ -7,7 +7,7 @@
     <meta name="author" content="William Pelletier">
     <link rel="stylesheet" type="text/css" href="../css/menu.css">
     <link rel="stylesheet" type="text/css" href="../css/layout.css">
-    <link rel="stylesheet" type="text/css" href="../css/title.css">
+    <link rel="stylesheet" type="text/css" href="../css/text.css">
     <link rel="icon" type="image/x-icon" href="../image/pandas-icon.png">
 
 </head>
@@ -40,56 +40,73 @@
 
     </header>
 
-
-    <section class="content">
+    <section>
 
         <p class="section-title">Length</p>
 
+        <div class="content-section">
 
-        <form>
+            <div class="rest">
 
-            <div id="dropdown-name">
-                <label>From</label>
-                <label>To</label>
+
+                <div class="dropdown-name">
+                    <span class="from-dname">From</span>
+                    <span>To</span>
+    
+                </div>
+
+                <form>
+
+               
+        
+                    <div class="dropdown-select" id="dropdown-select">
+                        
+                        <select class="froms" name="from" id="from-select" vtype="imperial"></select>
+                        <input class="invert" type="button" id="invert" value="⇆" />
+                        <select class="tos name="to" id="to-select" vtype="metric"></select>
+                        
+                    </div>
+        
+                    <div class="io">
+        
+                        <label class="unit-name" type="text" id="from-name"></label>
+                        <input class="number-display" type="text" id="from-input" autocomplete="off">
+                        <label class="back-unit" type="text" id="from-unit"></label>
+        
+                    </div>
+        
+                    <div class="button-row">
+        
+                        <input class="rbutton" type="button" id="bconvert" value="Convert">
+                        <input class="rbutton" type="button" id="breset"  value="Reset">
+                        
+                    </div>
+        
+                    <div class="io">
+                        <label class="unit-name" type="text" id="to-name"></label>
+                        <input class="number-display" type="text" text="" id="result" readonly>
+                        <label class="back-unit" type="text" id="to-unit"></label>
+        
+                    </div>
+        
+                </form>
+
 
             </div>
 
-            <div id="dropdown-select">
-                
-                <select name="from" id="from-select" vtype="imperial"></select>
-                <input type="button" id="invert" value="⇆" />
-                <select name="to" id="to-select" vtype="metric"></select>
-                
-            </div>
-
-            <div >
-
-                <label type="text" id="from-name"></label>
-                <input type="text" id="from-input" autocomplete="off">
-                <label type="text" id="from-unit"></label>
-
-            </div>
-
-            <div>
-
-                <input type="button" id="bconvert" value="Convert">
-                <input type="button" id="breset"  value="Reset">
-                
-            </div>
-
-            <div>
-                <label type="text" id="to-name"></label>
-                <input type="text" text="" id="result" readonly>
-                <label type="text" id="to-unit"></label>
-
-            </div>
-
-        </form>
 
 
+        </div>
+
+        
     </section>
 
-
+    <footer>
+        
+        <span class="left-foot" id="legal">© Pandas Units. No right reserved</span>
+        <span class="right-foot">Design by: Wpelletier01</span>
+    
+    </footer>
 
 
 
