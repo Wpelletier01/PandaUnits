@@ -189,9 +189,7 @@ function init() {
     if (pname == "temparature" || pname == "time") {
     
         setSelectionVal("#from-select","units");
-        setSelectionVal("#to-select","units");
-
-        $("#to-select option:selected").text(data["units"][1]["name"]);
+        setSelectionVal("#to-select","units",true);
 
         $("#from-input").val("0");
         $("#result").val("0");
@@ -220,28 +218,57 @@ function init() {
 
 
 
-function setSelectionVal(selectbox,utype) {
+function setSelectionVal(selectbox,utype,invert=false) {
 
 
 
     if (pname == "time" || pname == "temparature") {
        
+        if (!invert) {
 
-        data[utype].forEach(element => {
+            data[utype].forEach(element => {
 
-            $(selectbox).append(
-    
-                $('<option>', {
-                                    
-                    text: element.name,
-                    value:   element.unit,
-                   
+                $(selectbox).append(
         
-                })
-            );
+                    $('<option>', {
+                                        
+                        text: element.name,
+                        value:   element.unit,
+                       
             
+                    })
+                );
+                
+    
+            });
 
-        });
+
+
+
+        } else {
+
+
+            data[utype].reverse().forEach(element => {
+
+                $(selectbox).append(
+        
+                    $('<option>', {
+                                        
+                        text: element.name,
+                        value:   element.unit,
+                       
+            
+                    })
+                );
+                
+    
+            });
+
+
+
+
+        }
+ 
 
 
 
