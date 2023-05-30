@@ -42,7 +42,7 @@ export function convert(input,iunit,runit) {
 
     } else {
         // TODO: handling error
-        return 0;
+        return -1;
     }
 
 
