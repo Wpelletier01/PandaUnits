@@ -2,14 +2,13 @@
 var data = {};
 
 var pname = getCurrentPage();
+let module;
 
 if ( pname != null) {
 
     var moduleFile = './' + pname + '.js';
 
-    let module = await import(moduleFile);
-
-
+    module = await import(moduleFile);
 
 }
 
@@ -79,8 +78,17 @@ $("#from-select").on("change",function() {
 
     } 
 
+    if (getFromVal() != "0") {
 
-    updateDisplayUnit(); 
+        convertTrigged();
+
+    } else {
+
+        updateDisplayUnit(); 
+
+    }
+
+
 
 }); 
 
@@ -157,7 +165,8 @@ function convertTrigged() {
 
         if(!Number.isInteger(result)){
 
-            
+            // TODO: convert to scientific anotation when number is too small or too big
+
             result = round(result,5);
 
 

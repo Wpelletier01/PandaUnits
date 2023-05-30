@@ -18,8 +18,10 @@ export function convert(input,iunit,runit) {
         
         // normalized to in3 
         var cinches = convertImperialToCubeInches(input,iunit);
-        result = convertCubicIncheToMetric(cinches,runit);
 
+        console.log(cinches);
+        result = convertCubicIncheToMetric(cinches,runit);
+    
     } else if (IMPERIAL.includes(iunit) && IMPERIAL.includes(runit)) {
 
         // normalized to in3 
@@ -41,7 +43,7 @@ export function convert(input,iunit,runit) {
         return -1;
     }
 
-
+    return result
 }
 
 
@@ -130,7 +132,8 @@ function convertCubicIncheToMetric(cinches,unit) {
     switch (unit) {
 
         case "m3": {
-            result = cinches * 1.6387e-5; 
+            result = cinches / 61020; 
+            console.log(result);
             break;
         }
         case "L": {
@@ -340,7 +343,7 @@ function convertLiterToMetric(liters,unit) {
     switch(unit) {
 
         case "m3": {
-            result = value * 0.001;
+            result = liters * 0.001;
             break;
         }
         case "L": {
@@ -348,7 +351,7 @@ function convertLiterToMetric(liters,unit) {
             break;
         }
         case "ml": {
-            result = value * 1000;
+            result = liters * 1000;
             break;
         }
 
