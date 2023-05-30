@@ -4,7 +4,7 @@ var data = {};
 var pname = getCurrentPage();
 let module;
 
-if ( pname != null) {
+if ( pname != null && pname != "index") {
 
     var moduleFile = './' + pname + '.js';
 
@@ -19,10 +19,13 @@ if ( pname != null) {
 // when page load
 $(function() {
 
-    if (pname != null) {
+    var d = new Date();
+    $("#year").text(d.getFullYear());
+
+    if (pname != null && pname != "index") {
 
         $.getJSON("../json/section.json",function(section) {
-
+            var d = new Date();
             data = section[pname];
             init();
         });

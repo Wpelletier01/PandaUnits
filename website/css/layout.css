@@ -1,0 +1,44 @@
+
+
+
+.logo {
+
+    width:  150px;
+    height: 150px;
+
+
+}
+
+.header-content {
+    
+    margin-left: 30px;
+    
+}
+
+.head {
+    padding: 0;
+    margin: 0;
+    background-color:cornsilk;
+    display: flex;
+
+
+}
+
+body {
+
+    background-color:darkgray;
+
+
+}
+
+.footer {
+
+    background-color: azure;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+
+
+}
