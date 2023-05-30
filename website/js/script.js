@@ -35,9 +35,6 @@ $(function() {
 
 // when the invert button is trigger
 $("#invert").on("click", function() {
-
-
-
       
                 
     var from = $("#from-select").val();
@@ -47,13 +44,7 @@ $("#invert").on("click", function() {
     $("#from-select").val(to); 
     $("#to-select").val(from);           
 
-
-
-     
-
     setTimeout(function(){updateDisplayUnit()},20)
-
-
 
 });
 
@@ -62,7 +53,7 @@ $("#from-select").on("change",function() {
 
     var from = $("#from-select").val();
     
-    if (pname != "time" || pname != "temparature") {
+    if (pname != "time" && pname != "temparature") {
 
         if (module.IMPERIAL.includes(from)) {
 
