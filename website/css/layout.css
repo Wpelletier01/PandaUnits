@@ -15,30 +15,72 @@
     
 }
 
-.head {
+header {
     padding: 0;
     margin: 0;
-    background-color:cornsilk;
+    margin-bottom: 0px;
+
+    background-color: rgb(238, 238, 238);
     display: flex;
 
 
 }
 
-body {
+.content-section {
+    
+    padding: 0;
+    margin-top: 0 auto; 
+    
+    background-color: rgb(225, 212, 187);
+    display: flex;
+    
 
-    background-color:darkgray;
+}
+
+.ads {
+
+    padding: 0;
+    margin-top: 0;
+    background-color: rgb(238, 238, 238);
+    width: 175px;
+    height: 730px;
+
+    margin-bottom: 10px;
+    margin-right: 10px;
 
 
 }
 
-.footer {
+section {
+    position: fixed;
+    padding-top: 0 auto;
+    margin-top: 0px;
+   
 
-    background-color: black;
+}
+
+
+footer {
+
+
+    background-color:rgb(203, 178, 121);
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    text-align: center;
+    padding: 0;
+    height: 30px;
+    margin-top: auto;
+    display: flex;
+
+}
+
+
+body {
+
+    margin: 0;
+
+    background-color: rgb(83, 113, 136);
 
 
 }

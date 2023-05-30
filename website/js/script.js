@@ -19,8 +19,9 @@ if ( pname != null && pname != "index") {
 // when page load
 $(function() {
 
-    var d = new Date();
-    $("#year").text(d.getFullYear());
+    var d = new Date().getFullYear();
+    
+    $("#legal").text("© " + d + " Pandas Units. No right reserved");
 
     if (pname != null && pname != "index") {
 
