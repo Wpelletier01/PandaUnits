@@ -16,18 +16,45 @@
     border-top: 5px solid rgb(225, 212, 187);
     padding-left: 10px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
     font-size: 30px;
 
-
+   
     background-color: rgb(203, 178, 121);
 
 }
 
 
+.descriptor-title {
+
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.from-dname {
+
+    padding-right: 175px;
+
+}
+
+.froms {
+
+    margin-right: 10px;
+    width: 150px;
+
+}
+
+.invert {
+
+    margin-right: 40px;
+    width: 15px;
+}
+.tos {
 
 
+
+}
 
 .right-foot{
 

@@ -19,7 +19,6 @@ header {
     padding: 0;
     margin: 0;
     margin-bottom: 0px;
-
     background-color: rgb(238, 238, 238);
     display: flex;
 
@@ -27,49 +26,71 @@ header {
 }
 
 .content-section {
-    
-    padding: 0;
-    margin-top: 0 auto; 
-    
+
+    margin: 0 auto; 
     background-color: rgb(225, 212, 187);
     display: flex;
-    
+    padding-top: 20px;
 
 }
 
 .ads {
 
-    padding: 0;
-    margin-top: 0;
+
+  
     background-color: rgb(238, 238, 238);
     width: 175px;
     height: 730px;
 
     margin-bottom: 10px;
     margin-right: 10px;
+    
+}
 
+.rest {
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-right: 10px;
+    background-color: rgb(238, 238, 238) ;
+}
+
+
+.dropdown-name {
+
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.dropdown-select {
+
+    display: flex;
+
+}
+
+form {
+
+
+    padding-top: 10px;
+    font-size: 20px;
 
 }
 
 section {
-    position: fixed;
-    padding-top: 0 auto;
-    margin-top: 0px;
-   
+
+    margin-left: 20px;
+    margin-right: 20px;
 
 }
 
-
 footer {
 
-
     background-color:rgb(203, 178, 121);
-    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 0;
-    height: 30px;
+    height: 18px;
     margin-top: auto;
     display: flex;
 
@@ -78,8 +99,8 @@ footer {
 
 body {
 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
     margin: 0;
-
     background-color: rgb(83, 113, 136);
 
 

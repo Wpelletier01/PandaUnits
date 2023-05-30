@@ -6,7 +6,7 @@
     <meta name="description" content="weight unit converter">
     <meta name="author" content="William Pelletier">
     <link rel="stylesheet" type="text/css" href="../css/menu.css">
-    <link rel="stylesheet" type="text/css" href="../css/title.css">
+    <link rel="stylesheet" type="text/css" href="../css/text.css">
     <link rel="stylesheet" type="text/css" href="../css/layout.css">
     <link rel="icon" type="image/x-icon" href="../image/pandas-icon.png">
 
@@ -21,7 +21,7 @@
 
 
         <div class="header-content">
-            <p class="site-title">Panda Units </p>
+            <p class="site-title">Panda Units</p>
 
             <nav>
                 <ul class="menubar">
@@ -41,50 +41,71 @@
 
 
 
-    <section class="content">
+    <section>
 
         <p class="section-title">Weight</p>
 
+        <div class="content-section">
 
-        <form>
 
-            <div id="dropdown-name">
-                <label>From</label>
-                <label>To</label>
-
-            </div>
-
-            <div id="dropdown-select">
+            <div class="ad">
                 
-                <select name="from" id="from-select" vtype="imperial"></select>
-                <input type="button" id="invert" value="⇆" />
-                <select name="to" id="to-select" vtype="metric"></select>
-                
-            </div>
-
-            <div >
-
-                <label type="text" id="from-name"></label>
-                <input type="text" id="from-input" autocomplete="off">
-                <label type="text" id="from-unit"></label>
+                <img src="../image/ad.png">
 
             </div>
 
-            <div>
+            <div class="rest">
 
-                <input type="button" id="bconvert" value="Convert">
-                <input type="button" id="breset"  value="Reset">
-                
+
+                <div class="dropdown-name">
+                    <span class="from-dname">From</span>
+                    <span>To</span>
+    
+                </div>
+
+                <form>
+
+               
+        
+                    <div class="dropdown-select" id="dropdown-select">
+                        
+                        <select class="froms" name="from" id="from-select" vtype="imperial"></select>
+                        <input class="invert" type="button" id="invert" value="⇆" />
+                        <select class="tos name="to" id="to-select" vtype="metric"></select>
+                        
+                    </div>
+        
+                    <div >
+        
+                        <label type="text" id="from-name"></label>
+                        <input type="text" id="from-input" autocomplete="off">
+                        <label type="text" id="from-unit"></label>
+        
+                    </div>
+        
+                    <div>
+        
+                        <input type="button" id="bconvert" value="Convert">
+                        <input type="button" id="breset"  value="Reset">
+                        
+                    </div>
+        
+                    <div>
+                        <label type="text" id="to-name"></label>
+                        <input type="text" text="" id="result" readonly>
+                        <label type="text" id="to-unit"></label>
+        
+                    </div>
+        
+                </form>
+
+
             </div>
 
-            <div>
-                <label type="text" id="to-name"></label>
-                <input type="text" text="" id="result" readonly>
-                <label type="text" id="to-unit"></label>
 
-            </div>
 
-        </form>
+        </div>
+
         
     </section>
 
