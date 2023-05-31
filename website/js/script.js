@@ -45,9 +45,9 @@ $(function() {
 
 });
 
-/*
-*   take the value selected from the "from" dropdown and make it selected on the "to" dropdown, vice versa
-*/
+
+//  take the value selected from the "from" dropdown and make it selected on the "to" dropdown,
+//  vice versa
 $("#invert").on("click", function() {
       
                 
@@ -62,10 +62,7 @@ $("#invert").on("click", function() {
 
 });
 
-
-/*
-*   Trigger state change when the "From" dropdown change of selection
-*/
+//  Trigger state change when the "From" dropdown change of selection
 $("#from-select").on("change",function() { 
 
     // capture the new value
@@ -103,10 +100,7 @@ $("#from-select").on("change",function() {
 
 }); 
 
-
-/*
-*   Trigger state change when the "To" dropdown change of selection
-*/
+//  Trigger state change when the "To" dropdown change of selection
 $("#to-select").on("change",function(){
     
     
@@ -126,23 +120,17 @@ $("#to-select").on("change",function(){
         }
     }
 
-
-
     if (getFromVal() != "0") {
 
         convertTrigged();
-
     } else {
 
         updateDisplayUnit();
-
     }
 
 });
 
-/*
-*   Trigger the conversion by pressing the Enter key
-*/
+//  Trigger the conversion by pressing the Enter key
 $(document).on("keypress", function(e) {
 
     if (e.key == "Enter") {
@@ -153,14 +141,11 @@ $(document).on("keypress", function(e) {
 
 });
 
-/*
-*   Trigger the conversion by clicking the button "convert"
-*/
+//  Trigger the conversion by clicking the button "convert"
 $("#bconvert").on("click",function() { convertTrigged()});
 
-/*
-*   Reset the value to zero when the button reset is trigger
-*/
+
+//  Reset the value to zero when the button reset is trigger
 $("#breset").on("click",function() {
 
     $("#from-input").val("0");
@@ -174,9 +159,8 @@ $("#breset").on("click",function() {
 
 */
 
-
-/*
-*   convert the from value to the "to" unit 
+/** 
+ * convert the from value to the "to" unit 
 */
 function convertTrigged() {
 
@@ -204,11 +188,10 @@ function convertTrigged() {
 
     updateDisplayUnit();
 
-
 }
 
-/*
-*   initialise the value after loading the json file 
+/** 
+ *  initialise the value after loading the json file 
 */
 function init() {
 
@@ -238,16 +221,24 @@ function init() {
 
 }
 
+/** 
+*
+* Retreive option from the selection.json.
+*
+*   @param {String} selectbox   The select tag, either "from-select" or "to-select"
+*   @param {String} utype       Unit type, either "imperial", "metric" or "units" (for temparature and time)  
+*   @param {bool}   reverse     If or if not the option units array should be reverse
+*
+*/
+function setSelectionVal(selectbox,utype,reverse=false) {
 
-
-
-function setSelectionVal(selectbox,utype,invert=false) {
-
-
+    // only time and temparature need to be reversed 
+    // because the haven't two type of unit like imperial and metric.
+    // if we dont, the initial units will be the same 
 
     if (pname == "time" || pname == "temparature") {
        
-        if (!invert) {
+        if (!reverse) {
 
             data[utype].forEach(element => {
 
@@ -258,18 +249,11 @@ function setSelectionVal(selectbox,utype,invert=false) {
                         text: element.name,
                         value:   element.unit,
                        
-            
                     })
                 );
-                
-    
             });
 
-
-
-
         } else {
-
 
             data[utype].reverse().forEach(element => {
 
@@ -280,21 +264,11 @@ function setSelectionVal(selectbox,utype,invert=false) {
                         text: element.name,
                         value:   element.unit,
                        
-            
                     })
-                );
-                
-    
+                );   
             });
-
-
-
-
         }
  
-
-
-
     } else {
 
         data[utype].forEach(element => {
@@ -309,70 +283,77 @@ function setSelectionVal(selectbox,utype,invert=false) {
         
                 })
             );
-
-
         });
     }
          
 }
 
+/**
+ * 
+ *  Retreive the units of the "From" field
+ * 
+ *  @return {string}    the units of the "From" dropdown currently selected
+ * 
+ */
 function getFromUnit() {
 
     return $("#from-select option:selected").val();
 
 }
 
+/**
+ * 
+ *  Retreive the value of the "from" input
+ * 
+ *  @return {string}    the value of the "from" input
+ * 
+ */
 function getFromVal() {
 
     return $("#from-input").val();
 
 }
 
-function getToUnit() {
+/**
+ * 
+ *  Retreive the units of the "to" field
+ * 
+ *  @return {string}    the units of the "to" dropdown currently selected
+ * 
+ */
+function getToUnit() { return $("#to-select option:selected").val(); }
 
-    return $("#to-select option:selected").val();
-
-}
-
-function getFromUnitFamily() {
-
-    return $("#from-select").attr("vtype");
-
-}
-
-function getToUnitFamily() {
-
-    return $("#to-select").attr("vtype");
-
-}
-
-
-
+/**
+ * 
+ *  Set the text for the name before the box and for the unit after the box with the
+ *  value of the selected option of the two dropdown
+ * 
+ */
 function updateDisplayUnit() {
-
 
     var from = $("#from-select option:selected").text();
     
-
     $("#from-name").text(from.split("(")[0]);
-
     $("#from-unit").text(from.split("(")[1].split(")")[0])
-
-    
+  
     var to = $("#to-select option:selected").text();
-
-
 
     $("#to-name").text(to.split("(")[0]);
     $("#to-unit").text(to.split("(")[1].split(")")[0]);
 
-
-
 }
 
+/**
+ * 
+ *  Retreive the name of the html page that this script is loaded
+ *  
+ *  @return {string}    the name of the html page with his extension, otherwise return null 
+ *  
+ */
 function getCurrentPage() { 
 
-
+    // store because if eg the current page is www.example.com/index.html but is loaded without /index.html
+    // than this function doesn't work correctly
     var tmp = document.location.href.match(/[^\/]+$/);
 
     if (tmp == null) {
@@ -383,13 +364,19 @@ function getCurrentPage() {
     
     return tmp[0].split(".")[0] 
 
-
-
 }
 
+/**
+ * 
+ *  Check if the value is valid to be converted
+ *  
+ *  @param  {string}    input   the value to be validate   
+ *  @return {boolean}   either or not the input is valid 
+ *  
+ */
 function validateFromInput(input) {
 
-
+    // . for floating
     if (/[^0-9\.]/g.test(input)) {
 
 
@@ -403,6 +390,14 @@ function validateFromInput(input) {
 
 }
 
-
+/**
+ * 
+ *  round a floating number
+ *  
+ *  @param  {Number}    value       the number to be round   
+ *  @param  {Number}    decimals    the position at wich the round should be perform
+ *  @return {boolean}   either or not the input is valid 
+ *  
+ */
 function round(value, decimals) { return Number(Math.round(value+'e'+decimals)+'e-'+decimals); }
 
