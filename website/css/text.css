@@ -1,6 +1,4 @@
 
-
-
 .site-title {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -19,12 +17,9 @@
     margin-bottom: 0px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
     font-size: 30px;
-
-   
     background-color: rgb(203, 178, 121);
 
 }
-
 
 .descriptor-title {
 
@@ -59,17 +54,14 @@
 
 .unit-name {
 
-    
     width: 150px;
-
 
 }
 
 .back-unit {
 
     margin-left: 10px;
-
-
+    
 }
 
 .number-display {
